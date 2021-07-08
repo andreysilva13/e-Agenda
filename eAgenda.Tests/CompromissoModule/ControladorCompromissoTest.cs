@@ -127,13 +127,13 @@ namespace eAgenda.Tests.CompromissoModule
             Contato novoContato;
             Input(out dataCompromisso, out dataInicio, out dataTermino, out novoContato);
 
-            var compromisso = new Compromisso("Assunto Compromisso", "Local", "Link", dataCompromisso, dataInicio, dataTermino, null);
+            var compromisso = new Compromisso("Assunto Compromisso", "Local", "Link", new DateTime(2021, 12, 12), dataInicio, dataTermino, null);
             controladorCompromisso.InserirNovo(compromisso);
 
-            var compromisso1 = new Compromisso("Assunto Compromisso um", "Local", "Link", dataCompromisso, dataInicio, dataTermino, null);
+            var compromisso1 = new Compromisso("Assunto Compromisso um", "Local", "Link", new DateTime(2021, 12, 13), dataInicio, dataTermino, null);
             controladorCompromisso.InserirNovo(compromisso1);
 
-            var compromisso2 = new Compromisso("Assunto Compromisso dois", "Local", "Link", dataCompromisso, dataInicio, dataTermino, null);
+            var compromisso2 = new Compromisso("Assunto Compromisso dois", "Local", "Link", new DateTime(2021, 12, 14), dataInicio, dataTermino, null);
             controladorCompromisso.InserirNovo(compromisso2);
             //action
             var compromissos = controladorCompromisso.SelecionarTodos();
@@ -152,6 +152,22 @@ namespace eAgenda.Tests.CompromissoModule
             dataTermino = new TimeSpan(12, 12, 13);
             novoContato = new Contato("José Pedro", "jose.pedro@gmail.com", "321654987", "JP Ltda", "Dev");
             controladorContato.InserirNovo(novoContato);
+        }
+
+        [TestMethod]
+        public void DeveNegarInsercaoDeCompromissoNaMesmaData ()
+        {
+            //arrange
+            Compromisso compromisso = new Compromisso("Testar", "Casa", "", new DateTime(2001, 07, 03), new TimeSpan(13, 00, 00), new TimeSpan(14, 00, 00), null);
+            controladorCompromisso.InserirNovo(compromisso);
+
+            Compromisso compromissoInvalido = new Compromisso("Testar", "Casa", "", new DateTime(2001, 07, 03), new TimeSpan(13, 00, 00), new TimeSpan(14, 00, 00), null);
+            //act
+            string resultado = controladorCompromisso.InserirNovo(compromissoInvalido);
+
+            //assert
+            resultado.Should().Be("Já há compromisso marcado nessa data e horário");
+            controladorCompromisso.SelecionarTodos().Should().HaveCount(1);
         }
     }
 }

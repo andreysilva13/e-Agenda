@@ -58,9 +58,16 @@ namespace eAgenda.Controladores.Shared
 
                 object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
 
-                SQLiteParameter dbParameter = new SQLiteParameter(name, value);
-
-                command.Parameters.Add(dbParameter);
+                if (banco == "SQLite")
+                {
+                    SQLiteParameter dbParameter = new SQLiteParameter(name, value);
+                    command.Parameters.Add(dbParameter);
+                }
+                else
+                {
+                    SqlParameter dbParameter = new SqlParameter(name, value);
+                    command.Parameters.Add(dbParameter);
+                }
             }
             connection.Open();
             int id = Convert.ToInt32(command.ExecuteScalar());
@@ -82,9 +89,16 @@ namespace eAgenda.Controladores.Shared
 
                     object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
 
-                    SQLiteParameter dbParameter = new SQLiteParameter(name, value);
-
-                    command.Parameters.Add(dbParameter);
+                    if (banco == "SQLite")
+                    {
+                        SQLiteParameter dbParameter = new SQLiteParameter(name, value);
+                        command.Parameters.Add(dbParameter);
+                    }
+                    else
+                    {
+                        SqlParameter dbParameter = new SqlParameter(name, value);
+                        command.Parameters.Add(dbParameter);
+                    }
                 }
             }
 
@@ -130,9 +144,16 @@ namespace eAgenda.Controladores.Shared
 
                     object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
 
-                    SQLiteParameter dbParameter = new SQLiteParameter(name, value);
-
-                    command.Parameters.Add(dbParameter);
+                    if (banco == "SQLite")
+                    {
+                        SQLiteParameter dbParameter = new SQLiteParameter(name, value);
+                        command.Parameters.Add(dbParameter);
+                    }
+                    else
+                    {
+                        SqlParameter dbParameter = new SqlParameter(name, value);
+                        command.Parameters.Add(dbParameter);
+                    }
                 }
             }
 
@@ -160,9 +181,16 @@ namespace eAgenda.Controladores.Shared
 
                 object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
 
-                SQLiteParameter dbParameter = new SQLiteParameter(name, value);
-
-                command.Parameters.Add(dbParameter);
+                if(banco == "SQLite")
+                    {
+                    SQLiteParameter dbParameter = new SQLiteParameter(name, value);
+                    command.Parameters.Add(dbParameter);
+                }
+                    else
+                {
+                    SqlParameter dbParameter = new SqlParameter(name, value);
+                    command.Parameters.Add(dbParameter);
+                }
             }
 
             connection.Open();
@@ -172,23 +200,6 @@ namespace eAgenda.Controladores.Shared
             connection.Close();
 
             return numberRows > 0;
-        }
-
-        private static void SetParameters(this SqlCommand command, Dictionary<string, object> parameters)
-        {
-            if (parameters == null || parameters.Count == 0)
-                return;
-
-            foreach (var parameter in parameters)
-            {
-                string name = parameter.Key;
-
-                object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
-
-                SqlParameter dbParameter = new SqlParameter(name, value);
-
-                command.Parameters.Add(dbParameter);
-            }
         }
 
         private static string AppendSelectIdentity(this string sql)

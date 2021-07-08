@@ -147,6 +147,18 @@ namespace eAgenda.Controladores.CompromissoModule
             WHERE 
                 [ID] = @ID";
 
+        private const string sqlVerificaHora =
+            @"SELECT 
+                COUNT(*)
+            FROM
+                [TBCOMPROMISSO]
+            WHERE
+                [DATA]= @DATA
+            AND 
+                @HORA_INICIO_DESEJADO BETWEEN HORAINICIO AND HORATERMINO
+            AND
+                @HORA_TERMINO_DESEJADO BETWEEN HORAINICIO AND HORATERMINO";
+
         #endregion
 
         public override string InserirNovo(Compromisso registro)
@@ -155,7 +167,16 @@ namespace eAgenda.Controladores.CompromissoModule
 
             if (resultadoValidacao == "ESTA_VALIDO")
             {
-                registro.Id = Db.Insert(sqlInserirCompromisso, ObtemParametrosCompromisso(registro));
+                bool horarioOcupado = VerificarHorario(registro.Data, registro.HoraInicio, registro.HoraTermino);
+                if (horarioOcupado)
+                {
+                    resultadoValidacao = "Já há compromisso marcado nessa data e horário";
+                }
+                else
+                {
+                    registro.Id = Db.Insert(sqlInserirCompromisso, ObtemParametrosCompromisso(registro));
+                }
+
             }
 
             return resultadoValidacao;
@@ -260,6 +281,17 @@ namespace eAgenda.Controladores.CompromissoModule
             parametros.Add("ID_CONTATO", compromisso.Contato?.Id);
 
             return parametros;
+        }
+
+        private bool VerificarHorario(DateTime data, TimeSpan horaInicio, TimeSpan horaTermino)
+        {
+            var parametros = new Dictionary<string, object>();
+
+            parametros.Add("DATA", data);
+            parametros.Add("HORA_INICIO_DESEJADO", horaInicio.Ticks);
+            parametros.Add("HORA_TERMINO_DESEJADO", horaTermino.Ticks);
+
+            return Db.Exists(sqlVerificaHora, parametros);
         }
     }
 }
