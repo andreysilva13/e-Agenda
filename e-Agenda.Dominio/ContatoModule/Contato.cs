@@ -22,6 +22,11 @@ namespace eAgenda.Dominio.ContatoModule
         public string Cargo { get; }
         public string Empresa { get; }
 
+
+        public override string ToString()
+        {
+            return Nome + ", " + Cargo;
+        }
         public override string Validar()
         {
             Regex templateEmail = new Regex(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$");

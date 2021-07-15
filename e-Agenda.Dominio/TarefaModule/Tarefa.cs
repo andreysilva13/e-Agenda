@@ -5,7 +5,12 @@ using System.Collections.Generic;
 namespace eAgenda.Dominio.TarefaModule
 {
     public class Tarefa : EntidadeBase, IEquatable<Tarefa>
-    {        
+    {
+        public Tarefa()
+        {
+
+        }
+
         public Tarefa(string titulo, DateTime dataCriacao, PrioridadeEnum prioridade)
         {            
             Titulo = titulo;
@@ -32,6 +37,11 @@ namespace eAgenda.Dominio.TarefaModule
             {
                 DataConclusao = dataConclusao;
             }
+        }
+
+        public override string ToString()
+        {
+            return Id + ", " + Titulo;
         }
 
         public override bool Equals(object obj)
