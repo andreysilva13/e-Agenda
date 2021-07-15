@@ -30,13 +30,22 @@ namespace eAgenda.Forms
             AtualizarTela();
         }
 
+        #region métodos privados
         private void AtualizarTela()
         {
+            AtivaBotoes();
 
             DateTime dataFutura = DateTime.Now.AddDays(365);
             txtAssunto.Text = "";
             txtPresencial.Text = "";
             txtRemoto.Text = "";
+            radioButtonSim.Checked = false;
+            radioButtonNao.Checked = false;
+            radioButtonRemoto.Checked = false;
+            radioButtonPresencial.Checked = false;
+            dtCompromisso.Value = DateTime.Now;
+            dtHoraInicio.Value = DateTime.Now;
+            dtHoraTermino.Value = DateTime.Now;
 
             txtPresencial.Visible = false;
             txtRemoto.Visible = false;
@@ -142,25 +151,129 @@ namespace eAgenda.Forms
 
         private void listFuturo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            AtivaBotoes();
+
             Compromisso compromisso = listFuturo.SelectedItem as Compromisso;
+            id = compromisso.Id;
             txtAssunto.Text = compromisso.Assunto;
             dtCompromisso.Value = compromisso.Data;
-            dtHoraInicio.Value = Convert.ToDateTime(compromisso.HoraInicio);
-            dtHoraTermino.Value = Convert.ToDateTime(compromisso.HoraTermino);
+            dtHoraInicio.Value = Convert.ToDateTime(compromisso.HoraInicio.ToString());
+            dtHoraTermino.Value = Convert.ToDateTime(compromisso.HoraTermino.ToString());
 
-            if (txtPresencial != null)
+            if (compromisso.Local != "")
             {
                 radioButtonRemoto.Checked = false;
                 radioButtonPresencial.Checked = true;
                 txtPresencial.Text = compromisso.Local;
             }
-            else
+            else if (compromisso.Link != "")
             {
                 radioButtonPresencial.Checked = false;
                 radioButtonRemoto.Checked = true;
                 txtRemoto.Text = compromisso.Link;
             }
-            
+
+            if (compromisso.Contato != null)
+            {
+                radioButtonSim.Checked = true;
+                listContatos.SelectedItem = compromisso.Contato;
+            }
+            else if (compromisso.Contato == null)
+            {
+                radioButtonNao.Checked = true;
+            }
         }
+
+        private void listPassados_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            DesativaBotoes();
+
+            Compromisso compromisso = listPassados.SelectedItem as Compromisso;
+            id = compromisso.Id;
+            txtAssunto.Text = compromisso.Assunto;
+            dtCompromisso.Value = compromisso.Data;
+            dtHoraInicio.Value = Convert.ToDateTime(compromisso.HoraInicio.ToString());
+            dtHoraTermino.Value = Convert.ToDateTime(compromisso.HoraTermino.ToString());
+
+            if (compromisso.Local != "")
+            {
+                radioButtonRemoto.Checked = false;
+                radioButtonPresencial.Checked = true;
+                txtPresencial.Text = compromisso.Local;
+            }
+            else if (compromisso.Link != "")
+            {
+                radioButtonPresencial.Checked = false;
+                radioButtonRemoto.Checked = true;
+                txtRemoto.Text = compromisso.Link;
+            }
+
+            if (compromisso.Contato != null)
+            {
+                radioButtonSim.Checked = true;
+                listContatos.SelectedItem = compromisso.Contato;
+            }
+            else if (compromisso.Contato == null)
+            {
+                radioButtonNao.Checked = true;
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            Contato contato = null;
+            string local = "", link = "";
+            string assunto = txtAssunto.Text;
+            DateTime dataCompromisso = dtCompromisso.Value;
+            TimeSpan hrInicio = dtHoraInicio.Value.TimeOfDay;
+            TimeSpan hrTermino = dtHoraTermino.Value.TimeOfDay;
+
+            if (radioButtonPresencial.Checked)
+            {
+                local = txtPresencial.Text;
+                link = null;
+            }
+            else if (radioButtonRemoto.Checked)
+            {
+                link = txtRemoto.Text;
+                local = null;
+            }
+
+            if (radioButtonSim.Checked)
+                contato = listContatos.SelectedItem as Contato;
+            else if (radioButtonNao.Checked)
+                contato = null;
+
+            compromisso = new Compromisso(assunto, local, link, dataCompromisso, hrInicio, hrTermino, contato);
+            string validar = controladorCompromisso.Editar(id, compromisso);
+
+            if (validar == "ESTA_VALIDO")
+                MessageBox.Show("COMPROMISSO EDITADO");
+            else
+                MessageBox.Show("ERRO AO TENTAR EDITAR UM COMPROMISSO, TENTE NOVAMENTE");
+
+            AtualizarTela();
+        }
+
+        private void btnLimparTela_Click(object sender, EventArgs e)
+        {
+            AtualizarTela();
+        }
+
+        private void AtivaBotoes()
+        {
+            btnEditar.Enabled = true;
+            btnSalvar.Enabled = true;
+            btnExcluir.Enabled = true;
+        }
+
+        private void DesativaBotoes()
+        {
+            btnEditar.Enabled = false;
+            btnSalvar.Enabled = false;
+            btnExcluir.Enabled = false;
+        }
+        #endregion
     }
 }

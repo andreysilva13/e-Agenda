@@ -21,14 +21,21 @@ namespace FormTarefa
         #region métodos privados
         private void AtualizarTela()
         {
+            AtivaBotoes();
+
             dtConclusao.Enabled = false;
             dtCriacao.Enabled = false;
             txtPercentual.Enabled = false;
 
+            txtTitulo.Enabled = true;
+            txtPercentual.Enabled = true;
+            txtPercentual.Enabled = true;
+            comboBoxPrioridade.Enabled = true;
+
             txtPercentual.Text = ""; 
-            txtPrioridade.Text = ""; 
             txtTitulo.Text = "";
 
+            comboBoxPrioridade.SelectedItem = null;
             listTarefas.Items.Clear();
             listPendentes.Items.Clear();
             listConcluidos.Items.Clear();
@@ -55,9 +62,7 @@ namespace FormTarefa
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            string titulo = txtTitulo.Text;
-            int prioridade = Convert.ToInt32(txtPrioridade.Text);
-            tarefa = new Tarefa(titulo, DateTime.Now, (PrioridadeEnum)prioridade);
+            tarefa = new Tarefa(txtTitulo.Text, DateTime.Now, (PrioridadeEnum)comboBoxPrioridade.SelectedIndex);
             string verifica = controladorTarefa.InserirNovo(tarefa);
 
             if (verifica == "ESTA_VALIDO")
@@ -79,15 +84,25 @@ namespace FormTarefa
 
         private void listPendentes_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            AtivaBotoes();
+
+            int prioridade = 0;
             txtTitulo.Enabled = true;
             txtPercentual.Enabled = true;
-            txtPrioridade.Enabled = true;
             txtPercentual.Enabled = true;
+            comboBoxPrioridade.Enabled = true;
 
             Tarefa tarefa = listPendentes.SelectedItem as Tarefa;
             txtTitulo.Text = tarefa.Titulo;
             txtPercentual.Text = tarefa.Percentual.ToString();
-            txtPrioridade.Text = tarefa.Prioridade.ToString();
+            switch (tarefa.Prioridade.ToString())
+            {
+
+                case "Prioridade Alta": prioridade = 2; break;
+                case "Prioridade Normal": prioridade = 1; break;
+                case  "Prioridade Baixa": prioridade = 0; break;
+            }
+            comboBoxPrioridade.SelectedIndex = prioridade;
             dtCriacao.Value = tarefa.DataCriacao;
             
             id = tarefa.Id;
@@ -95,25 +110,43 @@ namespace FormTarefa
 
         private void listConcluido_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            Tarefa tarefa = listConcluidos.SelectedItem as Tarefa;
+            Visualizar(tarefa);
+        }
+
+        private void Visualizar(Tarefa tarefa)
+        {
+            int prioridade = 0;
             txtTitulo.Enabled = false;
             txtPercentual.Enabled = false;
-            txtPrioridade.Enabled = false;
+            comboBoxPrioridade.Enabled = false;
+            DesativaBotoes();
 
-            Tarefa tarefa = listConcluidos.SelectedItem as Tarefa;
+
             txtTitulo.Text = tarefa.Titulo;
             txtPercentual.Text = tarefa.Percentual.ToString();
-            txtPrioridade.Text = tarefa.Prioridade.ToString();
+            switch (tarefa.Prioridade.ToString())
+            {
+
+                case "Prioridade Alta": prioridade = 2; break;
+                case "Prioridade Normal": prioridade = 1; break;
+                case "Prioridade Baixa": prioridade = 0; break;
+            }
+            comboBoxPrioridade.SelectedIndex = prioridade;
             dtCriacao.Value = tarefa.DataCriacao;
-            dtConclusao.Value = (DateTime)tarefa.DataConclusao;
+            if (tarefa.DataConclusao != null)
+                dtConclusao.Value = (DateTime)tarefa.DataConclusao;
+            else
+                dtConclusao.Value = new DateTime(1800, 12, 30);
             
+
             id = tarefa.Id;
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
-        {   
-            string titulo = txtTitulo.Text;
-            int prioridade = Convert.ToInt32(txtPrioridade.Text);
-            int percentual = Convert.ToInt32(txtPercentual.Text);
+        {
+            int percentual = 0;
+
             if (percentual == 100)
             {
                 controladorTarefa.AtualizarPercentual(id, percentual);
@@ -121,7 +154,7 @@ namespace FormTarefa
             }
             else
             {
-                tarefa = new Tarefa(titulo, DateTime.Now, (PrioridadeEnum)prioridade);
+                tarefa = new Tarefa(txtTitulo.Text, DateTime.Now, (PrioridadeEnum)comboBoxPrioridade.SelectedIndex);
                 string verifica = controladorTarefa.Editar(id, tarefa);
                 controladorTarefa.AtualizarPercentual(id, percentual);
                 if (verifica == "ESTA_VALIDO")
@@ -132,5 +165,30 @@ namespace FormTarefa
             AtualizarTela();
         }
         #endregion
+
+        private void btnLimparTela_Click(object sender, EventArgs e)
+        {
+            AtualizarTela();
+        }
+
+        private void listTarefas_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Tarefa tarefa = listTarefas.SelectedItem as Tarefa;
+            Visualizar(tarefa);
+        }
+
+        private void AtivaBotoes()
+        {
+            btnEditar.Enabled = true;
+            btnSalvar.Enabled = true;
+            btnExcluir.Enabled = true;
+        }
+
+        private void DesativaBotoes()
+        {
+            btnEditar.Enabled = false;
+            btnSalvar.Enabled = false;
+            btnExcluir.Enabled = false;
+        }
     }
 }

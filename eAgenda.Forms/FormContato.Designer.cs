@@ -30,10 +30,12 @@ namespace FormContato
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.listContatoDoCargo = new System.Windows.Forms.ListBox();
             this.tabControlVisualizacao = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.listContatos = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listCargos = new System.Windows.Forms.ListBox();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
@@ -47,15 +49,19 @@ namespace FormContato
             this.labelEmail = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.labelNome = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnLimparTela = new System.Windows.Forms.Button();
+            this.groupBox = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.tabControlVisualizacao.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox);
+            this.panel1.Controls.Add(this.btnLimparTela);
             this.panel1.Controls.Add(this.tabControlVisualizacao);
             this.panel1.Controls.Add(this.btnExcluir);
             this.panel1.Controls.Add(this.btnEditar);
@@ -75,6 +81,15 @@ namespace FormContato
             this.panel1.Size = new System.Drawing.Size(638, 254);
             this.panel1.TabIndex = 0;
             // 
+            // listContatoDoCargo
+            // 
+            this.listContatoDoCargo.FormattingEnabled = true;
+            this.listContatoDoCargo.Location = new System.Drawing.Point(6, 13);
+            this.listContatoDoCargo.Name = "listContatoDoCargo";
+            this.listContatoDoCargo.Size = new System.Drawing.Size(251, 69);
+            this.listContatoDoCargo.TabIndex = 18;
+            this.listContatoDoCargo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listContatoDoCargo_MouseDoubleClick);
+            // 
             // tabControlVisualizacao
             // 
             this.tabControlVisualizacao.Controls.Add(this.tabPage1);
@@ -82,7 +97,7 @@ namespace FormContato
             this.tabControlVisualizacao.Location = new System.Drawing.Point(368, 11);
             this.tabControlVisualizacao.Name = "tabControlVisualizacao";
             this.tabControlVisualizacao.SelectedIndex = 0;
-            this.tabControlVisualizacao.Size = new System.Drawing.Size(267, 153);
+            this.tabControlVisualizacao.Size = new System.Drawing.Size(267, 117);
             this.tabControlVisualizacao.TabIndex = 20;
             // 
             // tabPage1
@@ -91,7 +106,7 @@ namespace FormContato
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(259, 127);
+            this.tabPage1.Size = new System.Drawing.Size(259, 91);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "TODOS";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -101,20 +116,29 @@ namespace FormContato
             this.listContatos.FormattingEnabled = true;
             this.listContatos.Location = new System.Drawing.Point(3, 3);
             this.listContatos.Name = "listContatos";
-            this.listContatos.Size = new System.Drawing.Size(253, 121);
+            this.listContatos.Size = new System.Drawing.Size(253, 82);
             this.listContatos.TabIndex = 16;
             this.listContatos.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listContatos_MouseDoubleClick);
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.listCargos);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(259, 127);
+            this.tabPage2.Size = new System.Drawing.Size(259, 91);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "P/ CARGOS";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listCargos
+            // 
+            this.listCargos.FormattingEnabled = true;
+            this.listCargos.Location = new System.Drawing.Point(3, 3);
+            this.listCargos.Name = "listCargos";
+            this.listCargos.Size = new System.Drawing.Size(253, 82);
+            this.listCargos.TabIndex = 17;
+            this.listCargos.Click += new System.EventHandler(this.listCargos_Click);
             // 
             // btnExcluir
             // 
@@ -227,13 +251,25 @@ namespace FormContato
             this.labelNome.TabIndex = 6;
             this.labelNome.Text = "NOME";
             // 
-            // listBox1
+            // btnLimparTela
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(253, 121);
-            this.listBox1.TabIndex = 17;
+            this.btnLimparTela.Location = new System.Drawing.Point(317, 228);
+            this.btnLimparTela.Name = "btnLimparTela";
+            this.btnLimparTela.Size = new System.Drawing.Size(75, 23);
+            this.btnLimparTela.TabIndex = 21;
+            this.btnLimparTela.Text = "ATUALIZAR";
+            this.btnLimparTela.UseVisualStyleBackColor = true;
+            this.btnLimparTela.Click += new System.EventHandler(this.btnLimparTela_Click);
+            // 
+            // groupBox
+            // 
+            this.groupBox.Controls.Add(this.listContatoDoCargo);
+            this.groupBox.Location = new System.Drawing.Point(368, 134);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.Size = new System.Drawing.Size(263, 88);
+            this.groupBox.TabIndex = 22;
+            this.groupBox.TabStop = false;
+            this.groupBox.Text = "CONTATOS NO CARGO";
             // 
             // FormContato
             // 
@@ -248,6 +284,7 @@ namespace FormContato
             this.tabControlVisualizacao.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.groupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -272,7 +309,10 @@ namespace FormContato
         private System.Windows.Forms.TabControl tabControlVisualizacao;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listCargos;
+        private System.Windows.Forms.ListBox listContatoDoCargo;
+        private System.Windows.Forms.Button btnLimparTela;
+        private System.Windows.Forms.GroupBox groupBox;
     }
 }
 

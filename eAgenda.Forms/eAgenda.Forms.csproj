@@ -139,10 +139,6 @@
       <Project>{4017e73e-8feb-4de8-8c3c-66178b41a902}</Project>
       <Name>eAgenda.Controladores</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FormTarefa\eAgenda.Form.csproj">
-      <Project>{b52971dc-3ac3-45ac-87f8-4f8ebdd53014}</Project>
-      <Name>eAgenda.Form</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -18,5 +18,10 @@ namespace eAgenda.Dominio.ContatoModule
         {
             Contatos.Add(c);
         }
+
+        public override string ToString()
+        {
+            return Campo; 
+        }
     }
 }

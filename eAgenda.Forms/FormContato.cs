@@ -27,6 +27,8 @@ namespace FormContato
         #region métodos privados
         private void AtualizarTela()
         {
+            AtivaBotoes();
+
             txtNome.Text = "";
             txtEmail.Text = "";
             txtCargo.Text = "";
@@ -34,12 +36,20 @@ namespace FormContato
             txtTelefone.Text = "";
 
             listContatos.Items.Clear();
+            listCargos.Items.Clear();
+            listContatoDoCargo.Items.Clear();
 
             List<Contato> visualizarTodosContatos = controladorContato.SelecionarTodos();
+            List<GrupoContato> visualizarTodosContatosPorCargo = controladorContato.SelecionarContatosAgrupados(c => c.Cargo);
 
             foreach (var item in visualizarTodosContatos)
             {
                 listContatos.Items.Add(item);
+            }
+
+            foreach (var item in visualizarTodosContatosPorCargo)
+            {
+                listCargos.Items.Add(item);
             }
         }
 
@@ -96,6 +106,43 @@ namespace FormContato
             txtTelefone.Text = contato.Telefone;
 
             id = contato.Id;
+        }
+
+        private void listCargos_Click(object sender, EventArgs e)
+        {
+            listContatoDoCargo.Items.Clear();
+
+            GrupoContato cargo = listCargos.SelectedItem as GrupoContato;
+            List<Contato> lista = new List<Contato>();
+
+            foreach (var item in cargo.Contatos)
+            {
+                listContatoDoCargo.Items.Add(item);
+            }
+        }
+
+        private void listContatoDoCargo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Contato contato = listContatoDoCargo.SelectedItem as Contato;
+            txtNome.Text = contato.Nome;
+            txtEmail.Text = contato.Email;
+            txtCargo.Text = contato.Cargo;
+            txtEmpresa.Text = contato.Email;
+            txtTelefone.Text = contato.Telefone;
+
+            id = contato.Id;
+        }
+
+        private void btnLimparTela_Click(object sender, EventArgs e)
+        {
+            AtualizarTela();
+        }
+
+        private void AtivaBotoes()
+        {
+            btnEditar.Enabled = true;
+            btnSalvar.Enabled = true;
+            btnExcluir.Enabled = true;
         }
         #endregion
     }

@@ -30,6 +30,12 @@ namespace FormTarefa
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxPrioridade = new System.Windows.Forms.ComboBox();
+            this.btnLimparTela = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtConclusao = new System.Windows.Forms.DateTimePicker();
+            this.dtCriacao = new System.Windows.Forms.DateTimePicker();
             this.tabControlPendentes = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listPendentes = new System.Windows.Forms.ListBox();
@@ -42,14 +48,9 @@ namespace FormTarefa
             this.btnSalvar = new System.Windows.Forms.Button();
             this.txtPercentual = new System.Windows.Forms.TextBox();
             this.labelPercentual = new System.Windows.Forms.Label();
-            this.txtPrioridade = new System.Windows.Forms.TextBox();
-            this.labelPrioridade = new System.Windows.Forms.Label();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.labelTituloTarefa = new System.Windows.Forms.Label();
-            this.dtCriacao = new System.Windows.Forms.DateTimePicker();
-            this.dtConclusao = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelPrioridade = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControlPendentes.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -59,6 +60,8 @@ namespace FormTarefa
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.comboBoxPrioridade);
+            this.panel1.Controls.Add(this.btnLimparTela);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dtConclusao);
@@ -69,7 +72,6 @@ namespace FormTarefa
             this.panel1.Controls.Add(this.btnSalvar);
             this.panel1.Controls.Add(this.txtPercentual);
             this.panel1.Controls.Add(this.labelPercentual);
-            this.panel1.Controls.Add(this.txtPrioridade);
             this.panel1.Controls.Add(this.labelPrioridade);
             this.panel1.Controls.Add(this.txtTitulo);
             this.panel1.Controls.Add(this.labelTituloTarefa);
@@ -77,6 +79,63 @@ namespace FormTarefa
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(596, 223);
             this.panel1.TabIndex = 0;
+            // 
+            // comboBoxPrioridade
+            // 
+            this.comboBoxPrioridade.FormattingEnabled = true;
+            this.comboBoxPrioridade.Items.AddRange(new object[] {
+            "Baixa",
+            "Normal",
+            "Alta"});
+            this.comboBoxPrioridade.Location = new System.Drawing.Point(129, 31);
+            this.comboBoxPrioridade.Name = "comboBoxPrioridade";
+            this.comboBoxPrioridade.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxPrioridade.TabIndex = 16;
+            // 
+            // btnLimparTela
+            // 
+            this.btnLimparTela.Location = new System.Drawing.Point(275, 197);
+            this.btnLimparTela.Name = "btnLimparTela";
+            this.btnLimparTela.Size = new System.Drawing.Size(75, 23);
+            this.btnLimparTela.TabIndex = 15;
+            this.btnLimparTela.Text = "ATUALIZAR";
+            this.btnLimparTela.UseVisualStyleBackColor = true;
+            this.btnLimparTela.Click += new System.EventHandler(this.btnLimparTela_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 146);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(123, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "DATA DE CONCLUSÃO";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 107);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "DATA DE CRIAÇÃO";
+            // 
+            // dtConclusao
+            // 
+            this.dtConclusao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtConclusao.Location = new System.Drawing.Point(18, 162);
+            this.dtConclusao.Name = "dtConclusao";
+            this.dtConclusao.Size = new System.Drawing.Size(102, 20);
+            this.dtConclusao.TabIndex = 12;
+            this.dtConclusao.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
+            // dtCriacao
+            // 
+            this.dtCriacao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtCriacao.Location = new System.Drawing.Point(18, 123);
+            this.dtCriacao.Name = "dtCriacao";
+            this.dtCriacao.Size = new System.Drawing.Size(102, 20);
+            this.dtCriacao.TabIndex = 11;
             // 
             // tabControlPendentes
             // 
@@ -147,6 +206,7 @@ namespace FormTarefa
             this.listTarefas.Name = "listTarefas";
             this.listTarefas.Size = new System.Drawing.Size(316, 108);
             this.listTarefas.TabIndex = 6;
+            this.listTarefas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTarefas_MouseDoubleClick);
             // 
             // btnExcluir
             // 
@@ -194,22 +254,6 @@ namespace FormTarefa
             this.labelPercentual.TabIndex = 4;
             this.labelPercentual.Text = "PERCENTUAL";
             // 
-            // txtPrioridade
-            // 
-            this.txtPrioridade.Location = new System.Drawing.Point(129, 31);
-            this.txtPrioridade.Name = "txtPrioridade";
-            this.txtPrioridade.Size = new System.Drawing.Size(100, 20);
-            this.txtPrioridade.TabIndex = 3;
-            // 
-            // labelPrioridade
-            // 
-            this.labelPrioridade.AutoSize = true;
-            this.labelPrioridade.Location = new System.Drawing.Point(129, 15);
-            this.labelPrioridade.Name = "labelPrioridade";
-            this.labelPrioridade.Size = new System.Drawing.Size(74, 13);
-            this.labelPrioridade.TabIndex = 2;
-            this.labelPrioridade.Text = "PRIORIDADE";
-            // 
             // txtTitulo
             // 
             this.txtTitulo.Location = new System.Drawing.Point(18, 31);
@@ -227,40 +271,14 @@ namespace FormTarefa
             this.labelTituloTarefa.TabIndex = 0;
             this.labelTituloTarefa.Text = "TITULO";
             // 
-            // dtCriacao
+            // labelPrioridade
             // 
-            this.dtCriacao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtCriacao.Location = new System.Drawing.Point(18, 123);
-            this.dtCriacao.Name = "dtCriacao";
-            this.dtCriacao.Size = new System.Drawing.Size(102, 20);
-            this.dtCriacao.TabIndex = 11;
-            // 
-            // dtConclusao
-            // 
-            this.dtConclusao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtConclusao.Location = new System.Drawing.Point(18, 162);
-            this.dtConclusao.Name = "dtConclusao";
-            this.dtConclusao.Size = new System.Drawing.Size(102, 20);
-            this.dtConclusao.TabIndex = 12;
-            this.dtConclusao.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 107);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "DATA DE CRIAÇÃO";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 146);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "DATA DE CONCLUSÃO";
+            this.labelPrioridade.AutoSize = true;
+            this.labelPrioridade.Location = new System.Drawing.Point(129, 15);
+            this.labelPrioridade.Name = "labelPrioridade";
+            this.labelPrioridade.Size = new System.Drawing.Size(74, 13);
+            this.labelPrioridade.TabIndex = 2;
+            this.labelPrioridade.Text = "PRIORIDADE";
             // 
             // FormTarefa
             // 
@@ -283,8 +301,6 @@ namespace FormTarefa
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtPrioridade;
-        private System.Windows.Forms.Label labelPrioridade;
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.Label labelTituloTarefa;
         private System.Windows.Forms.Button btnExcluir;
@@ -303,6 +319,9 @@ namespace FormTarefa
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtConclusao;
         private System.Windows.Forms.DateTimePicker dtCriacao;
+        private System.Windows.Forms.Button btnLimparTela;
+        private System.Windows.Forms.ComboBox comboBoxPrioridade;
+        private System.Windows.Forms.Label labelPrioridade;
     }
 }
 

@@ -28,8 +28,11 @@ namespace eAgenda.Dominio.CompromissoModule
         public Contato Contato { get; }
 
         public override string ToString()
-        {
-            return Assunto + ", " + Local + ", " + Link + Data.Date;
+        {   
+            if(Local == "")
+                return Assunto + ", " + Link + ", " + Data.Date;
+            else
+                return Assunto + ", " + Local + ", " + Data.Date;
         }
         public override bool Equals(object obj)
         {
