@@ -116,6 +116,27 @@ namespace eAgenda.Controladores.Shared
         {
             command = CriaSql(sql, connection);
 
+            if (parameters != null)
+            {
+                foreach (var parameter in parameters)
+                {
+                    string name = parameter.Key;
+
+                    object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
+
+                    if (banco == "SQLite")
+                    {
+                        SQLiteParameter dbParameter = new SQLiteParameter(name, value);
+                        command.Parameters.Add(dbParameter);
+                    }
+                    else
+                    {
+                        SqlParameter dbParameter = new SqlParameter(name, value);
+                        command.Parameters.Add(dbParameter);
+                    }
+                }
+            }
+
             connection.Open();
 
             var list = new List<T>();
@@ -181,12 +202,12 @@ namespace eAgenda.Controladores.Shared
 
                 object value = parameter.Value.IsNullOrEmpty() ? DBNull.Value : parameter.Value;
 
-                if(banco == "SQLite")
-                    {
+                if (banco == "SQLite")
+                {
                     SQLiteParameter dbParameter = new SQLiteParameter(name, value);
                     command.Parameters.Add(dbParameter);
                 }
-                    else
+                else
                 {
                     SqlParameter dbParameter = new SqlParameter(name, value);
                     command.Parameters.Add(dbParameter);
@@ -203,8 +224,8 @@ namespace eAgenda.Controladores.Shared
         }
 
         private static string AppendSelectIdentity(this string sql)
-        {   
-            if(banco == "SQLite")
+        {
+            if (banco == "SQLite")
                 return sql + ";SELECT last_insert_rowid()";
             else
                 return sql + ";SELECT SCOPE_IDENTITY()";

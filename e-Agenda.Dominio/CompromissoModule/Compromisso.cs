@@ -27,6 +27,10 @@ namespace eAgenda.Dominio.CompromissoModule
         public TimeSpan HoraTermino { get; }
         public Contato Contato { get; }
 
+        public override string ToString()
+        {
+            return Assunto + ", " + Local + ", " + Link + Data.Date;
+        }
         public override bool Equals(object obj)
         {
             return Equals(obj as Compromisso);

@@ -40,7 +40,6 @@ namespace eAgenda.Forms
             this.txtRemoto = new System.Windows.Forms.TextBox();
             this.labelRemoto = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.radioButtonRemoto = new System.Windows.Forms.RadioButton();
             this.radioButtonPresencial = new System.Windows.Forms.RadioButton();
@@ -54,9 +53,14 @@ namespace eAgenda.Forms
             this.dtHoraTermino = new System.Windows.Forms.DateTimePicker();
             this.dtHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.dtCompromisso = new System.Windows.Forms.DateTimePicker();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.listFuturo = new System.Windows.Forms.ListBox();
+            this.listPassados = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelAssunto
@@ -107,6 +111,7 @@ namespace eAgenda.Forms
             this.btnExcluir.TabIndex = 22;
             this.btnExcluir.Text = "EXCLUIR";
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnEditar
             // 
@@ -161,32 +166,23 @@ namespace eAgenda.Forms
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(340, 10);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(222, 291);
             this.tabControl1.TabIndex = 8;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(214, 265);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listFuturo);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(214, 265);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "FUTUROS";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // radioButtonRemoto
@@ -308,6 +304,34 @@ namespace eAgenda.Forms
             this.dtCompromisso.Size = new System.Drawing.Size(137, 20);
             this.dtCompromisso.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.listPassados);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(214, 265);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "PASSADA";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // listFuturo
+            // 
+            this.listFuturo.FormattingEnabled = true;
+            this.listFuturo.Location = new System.Drawing.Point(7, 7);
+            this.listFuturo.Name = "listFuturo";
+            this.listFuturo.Size = new System.Drawing.Size(201, 251);
+            this.listFuturo.TabIndex = 1;
+            this.listFuturo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listFuturo_MouseDoubleClick);
+            // 
+            // listPassados
+            // 
+            this.listPassados.FormattingEnabled = true;
+            this.listPassados.Location = new System.Drawing.Point(7, 7);
+            this.listPassados.Name = "listPassados";
+            this.listPassados.Size = new System.Drawing.Size(201, 251);
+            this.listPassados.TabIndex = 1;
+            // 
             // FormCompromisso
             // 
             this.ClientSize = new System.Drawing.Size(588, 337);
@@ -318,8 +342,10 @@ namespace eAgenda.Forms
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,10 +373,12 @@ namespace eAgenda.Forms
         private System.Windows.Forms.TextBox txtRemoto;
         private System.Windows.Forms.Label labelRemoto;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ListBox listFuturo;
+        private System.Windows.Forms.ListBox listPassados;
     }
 }
