@@ -54,7 +54,36 @@ namespace eAgenda.Forms
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            Contato contato = null;
+            string local = "", link = "";
+            string assunto = txtAssunto.Text;
+            DateTime dataCompromisso = dtCompromisso.Value;
+            TimeSpan hrInicio = dtHoraInicio.Value.TimeOfDay;
+            TimeSpan hrTermino = dtHoraTermino.Value.TimeOfDay;
 
+            if (radioButtonPresencial.Checked)
+            {
+                local = txtPresencial.Text;
+                link = null;
+            }
+            else if (radioButtonRemoto.Checked)
+            {
+                link = txtRemoto.Text;
+                local = null;
+            }
+
+            if (radioButtonSim.Checked)
+                contato = listContatos.SelectedItem as Contato;
+            else if (radioButtonNao.Checked)
+                contato = null;
+
+            compromisso = new Compromisso(assunto, local, link, dataCompromisso, hrInicio, hrTermino, contato);
+            string validar = controladorCompromisso.InserirNovo(compromisso);
+
+            if (validar == "ESTA_VALIDO")
+                MessageBox.Show("COMPROMISSO INSERIDO");
+            else
+                MessageBox.Show("ERRO AO TENTAR INSERIR UM COMPROMISSO, TENTE NOVAMENTE");
         }
 
         private void radioButtonRemoto_CheckedChanged(object sender, EventArgs e)
