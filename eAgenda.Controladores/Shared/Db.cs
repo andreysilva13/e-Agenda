@@ -52,6 +52,7 @@ namespace eAgenda.Controladores.Shared
         public static int Insert(string sql, Dictionary<string, object> parameters)
         {
             command = CriaSql(sql.AppendSelectIdentity(), connection);
+
             foreach (var parameter in parameters)
             {
                 string name = parameter.Key;

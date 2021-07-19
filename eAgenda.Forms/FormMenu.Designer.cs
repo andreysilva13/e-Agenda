@@ -51,6 +51,8 @@ namespace eAgenda.Forms
             // 
             // btnCompromisso
             // 
+            this.btnCompromisso.BackColor = System.Drawing.Color.White;
+            this.btnCompromisso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCompromisso.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCompromisso.Image = ((System.Drawing.Image)(resources.GetObject("btnCompromisso.Image")));
             this.btnCompromisso.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -60,11 +62,13 @@ namespace eAgenda.Forms
             this.btnCompromisso.TabIndex = 3;
             this.btnCompromisso.Text = "COMPROMISSOS";
             this.btnCompromisso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCompromisso.UseVisualStyleBackColor = true;
+            this.btnCompromisso.UseVisualStyleBackColor = false;
             this.btnCompromisso.Click += new System.EventHandler(this.btnCompromisso_Click);
             // 
             // btnContato
             // 
+            this.btnContato.BackColor = System.Drawing.Color.White;
+            this.btnContato.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContato.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnContato.Image = ((System.Drawing.Image)(resources.GetObject("btnContato.Image")));
             this.btnContato.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -74,11 +78,13 @@ namespace eAgenda.Forms
             this.btnContato.TabIndex = 2;
             this.btnContato.Text = "CONTATOS";
             this.btnContato.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnContato.UseVisualStyleBackColor = true;
+            this.btnContato.UseVisualStyleBackColor = false;
             this.btnContato.Click += new System.EventHandler(this.btnContato_Click);
             // 
             // btnTarefa
             // 
+            this.btnTarefa.BackColor = System.Drawing.Color.White;
+            this.btnTarefa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTarefa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTarefa.Image = ((System.Drawing.Image)(resources.GetObject("btnTarefa.Image")));
             this.btnTarefa.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -88,7 +94,7 @@ namespace eAgenda.Forms
             this.btnTarefa.TabIndex = 1;
             this.btnTarefa.Text = "TAREFAS";
             this.btnTarefa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTarefa.UseVisualStyleBackColor = true;
+            this.btnTarefa.UseVisualStyleBackColor = false;
             this.btnTarefa.Click += new System.EventHandler(this.btnTarefa_Click);
             // 
             // labelEAgenda

@@ -30,10 +30,11 @@ namespace eAgenda.Dominio.CompromissoModule
         public override string ToString()
         {   
             if(Local == "")
-                return Assunto + ", " + Link + ", " + Data.Date;
+                return Assunto + ", " + Link + ", " + Data.Date + ", " + HoraInicio.ToString();
             else
-                return Assunto + ", " + Local + ", " + Data.Date;
+                return Assunto + ", " + Local + ", " + Data.Date + ", " + HoraInicio.ToString();
         }
+
         public override bool Equals(object obj)
         {
             return Equals(obj as Compromisso);

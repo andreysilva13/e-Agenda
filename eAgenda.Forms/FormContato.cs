@@ -47,9 +47,12 @@ namespace FormContato
                 listContatos.Items.Add(item);
             }
 
-            foreach (var item in visualizarTodosContatosPorCargo)
+            if (visualizarTodosContatosPorCargo != null)
             {
-                listCargos.Items.Add(item);
+                foreach (var item in visualizarTodosContatosPorCargo)
+                {
+                    listCargos.Items.Add(item);
+                }
             }
         }
 
