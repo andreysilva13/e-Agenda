@@ -114,7 +114,7 @@ namespace eAgenda.Forms
             this.ClientSize = new System.Drawing.Size(238, 351);
             this.Controls.Add(this.panel1);
             this.Name = "FormMenu";
-            this.Text = "Form1";
+            this.Text = "Menu";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

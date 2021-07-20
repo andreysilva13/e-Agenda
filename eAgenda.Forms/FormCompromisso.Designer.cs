@@ -32,6 +32,7 @@ namespace eAgenda.Forms
             this.labelAssunto = new System.Windows.Forms.Label();
             this.txtAssunto = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLimparTela = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@ namespace eAgenda.Forms
             this.dtHoraTermino = new System.Windows.Forms.DateTimePicker();
             this.dtHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.dtCompromisso = new System.Windows.Forms.DateTimePicker();
-            this.btnLimparTela = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -104,6 +104,16 @@ namespace eAgenda.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(584, 335);
             this.panel1.TabIndex = 2;
+            // 
+            // btnLimparTela
+            // 
+            this.btnLimparTela.Location = new System.Drawing.Point(263, 309);
+            this.btnLimparTela.Name = "btnLimparTela";
+            this.btnLimparTela.Size = new System.Drawing.Size(75, 23);
+            this.btnLimparTela.TabIndex = 23;
+            this.btnLimparTela.Text = "ATUALIZAR";
+            this.btnLimparTela.UseVisualStyleBackColor = true;
+            this.btnLimparTela.Click += new System.EventHandler(this.btnLimparTela_Click);
             // 
             // btnExcluir
             // 
@@ -336,16 +346,6 @@ namespace eAgenda.Forms
             this.dtCompromisso.Size = new System.Drawing.Size(137, 20);
             this.dtCompromisso.TabIndex = 0;
             // 
-            // btnLimparTela
-            // 
-            this.btnLimparTela.Location = new System.Drawing.Point(263, 309);
-            this.btnLimparTela.Name = "btnLimparTela";
-            this.btnLimparTela.Size = new System.Drawing.Size(75, 23);
-            this.btnLimparTela.TabIndex = 23;
-            this.btnLimparTela.Text = "ATUALIZAR";
-            this.btnLimparTela.UseVisualStyleBackColor = true;
-            this.btnLimparTela.Click += new System.EventHandler(this.btnLimparTela_Click);
-            // 
             // FormCompromisso
             // 
             this.ClientSize = new System.Drawing.Size(588, 337);
@@ -353,6 +353,7 @@ namespace eAgenda.Forms
             this.Controls.Add(this.labelAssunto);
             this.Controls.Add(this.panel1);
             this.Name = "FormCompromisso";
+            this.Text = "Compromissos";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

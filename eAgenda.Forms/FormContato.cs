@@ -116,7 +116,6 @@ namespace FormContato
             listContatoDoCargo.Items.Clear();
 
             GrupoContato cargo = listCargos.SelectedItem as GrupoContato;
-            List<Contato> lista = new List<Contato>();
 
             foreach (var item in cargo.Contatos)
             {
